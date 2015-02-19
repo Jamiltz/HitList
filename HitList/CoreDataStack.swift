@@ -14,6 +14,8 @@ class CoreDataStack {
     let psc:NSPersistentStoreCoordinator
     let model:NSManagedObjectModel
     let store:CBLIncrementalStore?
+    let pull: CBLReplication!
+    let push: CBLReplication!
     
     init() {
         //1
@@ -60,8 +62,8 @@ class CoreDataStack {
         }
         
         let url =  NSURL(string: "http://178.62.81.153:4984/hitlist/")
-        let pull = store?.database.createPullReplication(url)
-        let push = store?.database.createPushReplication(url)
+        pull = store?.database.createPullReplication(url)
+        push = store?.database.createPushReplication(url)
         pull?.continuous = true
         push?.continuous = true
         
