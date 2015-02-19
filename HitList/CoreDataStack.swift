@@ -62,6 +62,8 @@ class CoreDataStack {
         let url =  NSURL(string: "http://178.62.81.153:4984/hitlist/")
         let pull = store?.database.createPullReplication(url)
         let push = store?.database.createPushReplication(url)
+        pull?.continuous = true
+        push?.continuous = true
         
         pull?.start()
         push?.start()
