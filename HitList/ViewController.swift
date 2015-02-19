@@ -18,43 +18,39 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         title = "The List"
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        getPeople()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "newObjects:", name: NSManagedObjectContextObjectsDidChangeNotification, object: nil)
+    }
+    
+    func getPeople() {
         let fetchRequest = NSFetchRequest(entityName: "Person")
-        
         var error: NSError?
-        
         let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
-        
         if let results = fetchedResults {
             people = results
         } else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func newObjects(notification: NSNotification) {
+        getPeople()
+        tableView.reloadData()
     }
 
     @IBAction func addName(sender: AnyObject) {
         
         var alert = UIAlertController(title: "New name", message: "Add a new name", preferredStyle: .Alert)
-        
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) -> Void in
-            
             let textField = alert.textFields![0] as UITextField
             self.saveName(textField.text)
             self.tableView.reloadData()
-            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action) -> Void in
@@ -75,9 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     func saveName(name: String) {
         
         let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: managedContext)
-        
         let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
         person.setValue(name, forKey: "name")
         
         var error: NSError?

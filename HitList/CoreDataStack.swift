@@ -37,29 +37,31 @@ class CoreDataStack {
         let documentsURL = applicationDocumentsDirectory()
         let defaultStoreURL = documentsURL.URLByAppendingPathComponent("HitList")
         
-        let options: NSDictionary = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+        let options: NSDictionary = [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true
+        ]
         let databaseName = "hitlist"
         let storeURL = NSURL(string: databaseName)!
         var error: NSError? = nil
         
         if (!(CBLManager.sharedInstance().existingDatabaseNamed(databaseName, error: nil) != nil)) {
-//            let defaultStoreURL = bundle.URLForResource("HitList", withExtension: "sqlite")
+            
             let importStore = psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: defaultStoreURL, options: options, error: nil)
-            store = psc.migratePersistentStore(importStore!, toURL: storeURL, options: options, withType: CBLIncrementalStore.type(), error: nil) as CBLIncrementalStore
+            store = psc.migratePersistentStore(importStore!, toURL: storeURL, options: options, withType: CBLIncrementalStore.type(), error: nil) as? CBLIncrementalStore
+            
         } else {
-            store = psc.addPersistentStoreWithType(CBLIncrementalStore.type(), configuration: nil, URL: storeURL, options: options, error: &error) as CBLIncrementalStore
+            
+            store = psc.addPersistentStoreWithType(CBLIncrementalStore.type(), configuration: nil, URL: storeURL, options: options, error: &error) as? CBLIncrementalStore
+            
         }
         
-//        store = psc.addPersistentStoreWithType(NSSQLiteStoreType,
-//            configuration: nil,
-//            URL: storeURL,
-//           options: options,
-//            error:&error)
-//        
         if store == nil {
             println("Error adding persistent store: \(error)")
             abort()
         }
+        
+        store?.addObservingManagedObjectContext(context)
         
         let url =  NSURL(string: "http://178.62.81.153:4984/hitlist/")
         pull = store?.database.createPullReplication(url)
