@@ -26,11 +26,14 @@ typedef enum
     CBLIncrementalStoreErrorPersistingDeletedObjectsFailed,
     CBLIncrementalStoreErrorQueryingCouchbaseLiteFailed,
     CBLIncrementalStoreErrorUnsupportedRequestType,
-    CBLIncrementalStoreErrorCreatingQueryFailed
+    CBLIncrementalStoreErrorUnsupportedPredicate,
+    CBLIncrementalStoreErrorPredicateKeyPathNotFoundInEntity,
+    CBLIncrementalStoreErrorUnsupportedFetchRequestResultType
 } CBLIncrementalStoreError;
 
 @class CBLDocument;
 @class CBLDatabase;
+@class CBLManager;
 
 
 /** Block that handles conflicts and can merge all conflicting revisions into one, dismiss all conflicts, etc.
@@ -102,6 +105,11 @@ typedef void(^CBLISConflictHandler)(NSArray *conflictingRevisions);
                                                      importType:(NSString*)importType
                                                           error:(NSError**)outError;
 
+/** Configures which CBLManager instance to use. The default value (nil) means to use
+    the shared CBLManager. */
++ (void) setCBLManager: (CBLManager*)manager;
++ (CBLManager*) CBLManager;
+
 /** Register a NSManagedObjectContext to be informed about changes in the CouchbaseLite database. A NSManagedObjectContextObjectsDidChangeNotification is sent
  * to this context on changes.
  */
@@ -117,6 +125,7 @@ typedef void(^CBLISConflictHandler)(NSArray *conflictingRevisions);
  * @param entityName name of the entity that should be fetched
  * @param propertyName name of the property referencing this entity
  */
-- (void) defineFetchViewForEntity:(NSString*)entityName byProperty:(NSString*)propertyName;
+- (void) defineFetchViewForEntity:(NSString*)entityName byProperty:(NSString*)propertyName
+    __attribute__((deprecated("The method is no longer needed, and calling this method will do nothing.")));
 
 @end
