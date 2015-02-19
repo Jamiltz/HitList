@@ -15,6 +15,8 @@
 		BE36431B1A93967300309467 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3643191A93967300309467 /* LaunchScreen.xib */; };
 		BE3643271A93967300309467 /* HitListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3643261A93967300309467 /* HitListTests.swift */; };
 		BE8441751A962356005B0C08 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8441741A962356005B0C08 /* CoreDataStack.swift */; };
+		BE84417B1A9633AE005B0C08 /* CBLIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE84417A1A9633AE005B0C08 /* CBLIncrementalStore.m */; };
+		C83B745F0BCF5BB612B27BEB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BABADD84F21098E45C79078 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AC43F17E546520C1E7A4024 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9BABADD84F21098E45C79078 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABCE708925DE38666FA832CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BE3643081A93967300309467 /* HitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE36430C1A93967300309467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE36430D1A93967300309467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,9 @@
 		BE3643251A93967300309467 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE3643261A93967300309467 /* HitListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitListTests.swift; sourceTree = "<group>"; };
 		BE8441741A962356005B0C08 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		BE8441761A96333C005B0C08 /* bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bridging-header.h"; sourceTree = "<group>"; };
+		BE8441791A9633AE005B0C08 /* CBLIncrementalStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBLIncrementalStore.h; sourceTree = "<group>"; };
+		BE84417A1A9633AE005B0C08 /* CBLIncrementalStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBLIncrementalStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C83B745F0BCF5BB612B27BEB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +69,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B4B6D85BE57E01739481471 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ABCE708925DE38666FA832CC /* Pods.debug.xcconfig */,
+				0AC43F17E546520C1E7A4024 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		772A2A9EDA04D3C89558E11A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9BABADD84F21098E45C79078 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BE3642FF1A93967300309467 = {
 			isa = PBXGroup;
 			children = (
+				BE8441771A96336B005B0C08 /* Extra */,
 				BE36430A1A93967300309467 /* HitList */,
 				BE3643231A93967300309467 /* HitListTests */,
 				BE3643091A93967300309467 /* Products */,
+				4B4B6D85BE57E01739481471 /* Pods */,
+				772A2A9EDA04D3C89558E11A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				BE36430C1A93967300309467 /* Info.plist */,
+				BE8441761A96333C005B0C08 /* bridging-header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -118,6 +148,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BE8441771A96336B005B0C08 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				BE8441791A9633AE005B0C08 /* CBLIncrementalStore.h */,
+				BE84417A1A9633AE005B0C08 /* CBLIncrementalStore.m */,
+			);
+			name = Extra;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,9 +164,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE36432A1A93967300309467 /* Build configuration list for PBXNativeTarget "HitList" */;
 			buildPhases = (
+				30D46500C8EE5B168E4DB4AE /* Check Pods Manifest.lock */,
 				BE3643041A93967300309467 /* Sources */,
 				BE3643051A93967300309467 /* Frameworks */,
 				BE3643061A93967300309467 /* Resources */,
+				2946379A566E4868628EFAC9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,12 +254,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2946379A566E4868628EFAC9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30D46500C8EE5B168E4DB4AE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BE3643041A93967300309467 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BE3643131A93967300309467 /* ViewController.swift in Sources */,
+				BE84417B1A9633AE005B0C08 /* CBLIncrementalStore.m in Sources */,
 				BE36430E1A93967300309467 /* AppDelegate.swift in Sources */,
 				BE3643111A93967300309467 /* HitList.xcdatamodeld in Sources */,
 				BE8441751A962356005B0C08 /* CoreDataStack.swift in Sources */,
@@ -344,21 +419,29 @@
 		};
 		BE36432B1A93967300309467 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABCE708925DE38666FA832CC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = HitList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HitList-Bridging-Header.h";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "HitList/bridging-header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		BE36432C1A93967300309467 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AC43F17E546520C1E7A4024 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = HitList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HitList-Bridging-Header.h";
 			};
 			name = Release;
 		};

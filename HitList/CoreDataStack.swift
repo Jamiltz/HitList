@@ -21,6 +21,9 @@ class CoreDataStack {
         let modelURL = bundle.URLForResource("HitList", withExtension:"momd")
         model = NSManagedObjectModel(contentsOfURL: modelURL!)!
         
+        //1.1
+        CBLIncrementalStore.updateManagedObjectModel(model)
+        
         //2
         psc = NSPersistentStoreCoordinator(managedObjectModel:model)
         
@@ -34,13 +37,22 @@ class CoreDataStack {
         
         let options = [NSMigratePersistentStoresAutomaticallyOption: true]
         
-        var error: NSError? = nil
-        store = psc.addPersistentStoreWithType(NSSQLiteStoreType,
-            configuration: nil,
-            URL: storeURL,
-            options: options,
-            error:&error)
         
+        let databaseName = "String"
+        if !(CBLManager.sharedInstance().existingDatabaseNamed(databaseName, error: nil) != nil) {
+            let importStore = psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options, error: nil)
+            store = psc.migratePersistentStore(importStore, toURL: <#NSURL#>, options: <#[NSObject : AnyObject]?#>, withType: <#String#>, error: <#NSErrorPointer#>)
+        }
+        
+        var error: NSError? = nil
+        store = psc.addPersistentStoreWithType(CBLIncrementalStore.type(), configuration: nil, URL: storeURL, options: options, error: &error)
+        
+//        store = psc.addPersistentStoreWithType(NSSQLiteStoreType,
+//            configuration: nil,
+//            URL: storeURL,
+//            options: options,
+//            error:&error)
+//        
         if store == nil {
             println("Error adding persistent store: \(error)")
             abort()
